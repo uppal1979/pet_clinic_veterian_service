@@ -21,7 +21,7 @@ public class BaseEntity implements Serializable {
     private Integer id;
 
 
-    public boolean isNew() {
+    public boolean isNewlyAdded() {
         return this.id == null;
     }
 
