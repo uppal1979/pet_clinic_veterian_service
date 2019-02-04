@@ -7,6 +7,11 @@ Feature: Veterinarian
 	Given Jonn search for veterinarian available
 
 	Then  John should get the veterinarian as
-	  | name         |Specialties|
-	  | James Carter |none       |
+	  | firstName | lastName | Specialties |
+	  | James     | Carter   | none        |
+	  | Helen     | Leary    | radiology   |
+	  | Linda     | Douglas  | surgery     |
+	  | Rafael    | Ortega   | surgery     |
+	  | Henry     | Stevens  | radiology   |
+	  | Sharon    | Jenkins  |             |
 
