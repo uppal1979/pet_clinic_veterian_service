@@ -13,4 +13,5 @@ import java.io.Serializable;
 @Table(name = "specialties")
 public class Specialty extends NamedEntity implements Serializable {
 
+
 }
