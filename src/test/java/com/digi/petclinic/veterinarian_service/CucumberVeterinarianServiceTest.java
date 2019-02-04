@@ -10,4 +10,5 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 @CucumberOptions(features = "src/main/resources/feature", glue="com.digi.petclinic.veterinarian_service.stepdef")
 public class CucumberVeterinarianServiceTest {
+
 }

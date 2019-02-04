@@ -4,9 +4,9 @@ Feature: Veterinarian
 
   Scenario: Search for complete veterinarian
 
-    Given Jonn search for veterinarian available in the application
+	Given Jonn search for veterinarian available
 
-    Then  John should get the veterinarian as
-      | message                                                                              |
-      | Hello Ashok, your account has been created successfully.Account number AshokAHPS34FU |
+	Then  John should get the veterinarian as
+	  | name         |Specialties|
+	  | James Carter |none       |
 
