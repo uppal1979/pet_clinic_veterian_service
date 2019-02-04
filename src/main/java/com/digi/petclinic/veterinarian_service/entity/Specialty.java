@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "specialties")
 public class Specialty extends NamedEntity implements Serializable {
