@@ -40,6 +40,12 @@ public class VetStepDef {
 
         vetList.forEach(vet -> {
             assertThat(vet.getFirstName(), is(testVetList.get(count).getFirstName()));
+            {
+                vet.getSpecialties().forEach(speciality -> {
+
+                    assertThat(speciality.getName(), is(testVetList.get(count).getSpecialties()));
+                });
+            }
             count++;
 
         });
