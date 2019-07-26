@@ -8,4 +8,3 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/petclinic
     username: root
-    password: root1234
