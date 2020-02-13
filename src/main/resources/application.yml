@@ -6,7 +6,9 @@ spring:
   application:
     name: veterinarian_service
   datasource:
-    #url: jdbc:mysql://localhost/petclinic
-    url: jdbc:mysql://localhost/petclinic_ms_vet
-    username: root
-    password: root1234
+    schema: classpath*:hsqldb/schema.sql
+    data: classpath*:hsqldb/data.sql
+    initialization-mode: always
+  jpa:
+    hibernate:
+      ddl-auto: none

@@ -29,13 +29,13 @@ public class VetStepDef {
     private List<Vet> vetList = new ArrayList<>();
     private int count = 0;
 
-    @Given("^Jonn search for veterinarian available$")
+   /* @Given("^Jonn search for veterinarian available$")
     public void jonn_search_for_veterinarian_available() throws Throwable {
 
         vetList = vetRepository.findAll();
-    }
+    }*/
 
-    @Then("^John should get the veterinarian as$")
+    /*@Then("^John should get the veterinarian as$")
     public void john_should_get_the_veterinarian_as(List<VetTestPojo> testVetList) throws Throwable {
 
         vetList.forEach(vet -> {
@@ -49,6 +49,6 @@ public class VetStepDef {
             count++;
 
         });
-    }
+    }*/
 
 }
