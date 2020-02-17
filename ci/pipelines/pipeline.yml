@@ -78,9 +78,9 @@ jobs:
   plan:
   - get: app_sources
     trigger: true
-#    passed:
+    passed:
 #      - load-tests
-#      - build_n_deploy
+      - build_n_deploy
   - task: get-current-app-color
     file: app_sources/ci/tasks/current-app-get-info.yml
     params:
