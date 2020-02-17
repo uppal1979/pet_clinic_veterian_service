@@ -11,7 +11,7 @@ resources:
   type: git
   source:
     branch: master
-    uri: https://github.com/digital-pcf/pet_clinic_veterian_service
+    uri: https://github.com/josephkevin1/pet_clinic_veterian_service
 - name: staging_deployment
   type: cf
   source:
