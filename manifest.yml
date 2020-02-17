@@ -1,5 +1,5 @@
 applications:
-  - name: pet-clinic-veterian-service
+  - name: APPNAME
     path: ./target/veterinarian_service-0.0.1-SNAPSHOT.jar
     random-route: true
     memory: 500M
