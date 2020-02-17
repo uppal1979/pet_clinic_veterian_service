@@ -11,7 +11,7 @@ resources:
   type: git
   source:
     branch: master
-    uri: https://github.com/josephkevin1/pet-clinic-owner-service
+    uri: https://github.com/digital-pcf/pet_clinic_veterian_service
 - name: staging_deployment
   type: cf
   source:
@@ -48,11 +48,7 @@ jobs:
             echo "$(mvn --version)"
             cd app_sources
             mvn package
-            #Below commented commands were used to locate .jar
-            #echo "$(ls)"
-            #cd target
-            #echo "$(ls)"
-            mv target/owner_service-*.jar ../app_jar
+            mv target/veterinarian_service-*.jar ../app_jar
       outputs:
         - name: app_jar
 
