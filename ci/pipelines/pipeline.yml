@@ -1,0 +1,102 @@
+groups:
+- name: main
+  jobs:
+#  - unit-tests
+  - build_n_deploy
+#  - load-tests
+  - promote-new-version
+
+resources:
+- name: app_sources
+  type: git
+  source:
+    branch: master
+    uri: https://github.com/josephkevin1/pet_clinic_veterian_service
+- name: staging_deployment
+  type: cf
+  source:
+    api: {{pws-api}}
+    username: {{deploy-username}}
+    password: {{deploy-password}}
+    organization: {{pws-organization}}
+    space: {{pws-space}}
+    skip_cert_check: false
+
+jobs:
+- name: build_n_deploy
+  public: true
+  plan:
+  - get: app_sources
+    trigger: true
+
+  - task: run-build
+    config:
+      platform: linux
+      inputs:
+        - name: app_sources
+      image_resource:
+        type: docker-image
+        #        source: {repository: maven:3.3-jdk-8}
+        source:
+          repository: maven
+          tag: "latest"
+      run:
+        path: /bin/sh
+        args:
+          - -exc
+          - |
+            echo "$(mvn --version)"
+            cd app_sources
+            mvn package
+            mv target/veterinarian_service-*.jar ../app_jar
+      outputs:
+        - name: app_jar
+
+  - task: get-current-app-color
+    file: app_sources/ci/tasks/current-app-get-info.yml
+    params:
+      PWS_APP_SUFFIX: {{pws-app-suffix}}
+      PWS_API: {{pws-api}}
+      PWS_ORG: {{pws-organization}}
+      PWS_USER: {{deploy-username}}
+      PWS_PWD: {{deploy-password}}
+      PWS_SPACE: {{pws-space}}
+
+  - task: prepare-app-manifest
+    file: app_sources/ci/tasks/app-manifest-prep.yml
+    params:
+      PWS_APP_SUFFIX: {{pws-app-suffix}}
+
+  - put: staging_deployment
+    params:
+      path: app_jar/*.jar
+      manifest: app-manifest-output/manifest.yml
+
+- name: promote-new-version
+  serial: true
+  public: true
+  plan:
+  - get: app_sources
+    trigger: true
+    passed:
+#      - load-tests
+      - build_n_deploy
+  - task: get-current-app-color
+    file: app_sources/ci/tasks/current-app-get-info.yml
+    params:
+      PWS_APP_SUFFIX: {{pws-app-suffix}}
+      PWS_API: {{pws-api}}
+      PWS_ORG: {{pws-organization}}
+      PWS_USER: {{deploy-username}}
+      PWS_PWD: {{deploy-password}}
+      PWS_SPACE: {{pws-space}}
+  - task: switch-app-routes
+    file: app_sources/ci/tasks/update-routes.yml
+    params:
+      PWS_APP_SUFFIX: {{pws-app-suffix}}
+      PWS_APP_DOMAIN: {{pws-app-domain}}
+      PWS_API: {{pws-api}}
+      PWS_ORG: {{pws-organization}}
+      PWS_USER: {{deploy-username}}
+      PWS_PWD: {{deploy-password}}
+      PWS_SPACE: {{pws-space}}
