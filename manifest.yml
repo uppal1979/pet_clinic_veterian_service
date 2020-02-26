@@ -11,4 +11,5 @@ applications:
     services:
       - vets-config-server
       - mysqldb
+      - petclinic-autoscaler
 
